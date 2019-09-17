@@ -10,7 +10,13 @@ import java.io.OutputStream;
 import java.util.Date;
 import java.util.Random;
 
-
+/**
+*@author rock
+*@Date 2019/9/17 23:13
+*@param 
+*@return 
+*
+*/
 public class CodeImgUtil {
     // 图片的宽度。
     private int width = 160;

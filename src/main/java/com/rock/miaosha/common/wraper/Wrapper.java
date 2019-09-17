@@ -2,7 +2,13 @@ package com.rock.miaosha.common.wraper;
 
 import java.io.Serializable;
 import java.util.List;
-
+/**
+*@author rock
+*@Date 2019/9/17 23:14
+*@param 
+*@return 
+*
+*/
 public class Wrapper<T> implements Serializable {
 
     private static final long serialVersionUID = -8487183569094095497L;

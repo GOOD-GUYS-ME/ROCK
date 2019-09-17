@@ -4,7 +4,13 @@ import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.util.ByteSource;
 
 import java.security.MessageDigest;
-
+/**
+*@author rock
+*@Date 2019/9/17 23:14
+*@param 
+*@return 
+*
+*/
 public class MD5utils {
     private final String salt;
 

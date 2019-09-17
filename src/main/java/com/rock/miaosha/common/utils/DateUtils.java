@@ -3,7 +3,13 @@ package com.rock.miaosha.common.utils;
 import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.text.SimpleDateFormat;/**
+*@author rock
+*@Date 2019/9/17 23:14
+*@param 
+*@return 
+*
+*/
 @Component
 public class DateUtils {
     public String dateTime2Millis(long millisTime){

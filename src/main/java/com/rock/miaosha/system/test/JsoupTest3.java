@@ -10,7 +10,13 @@ import redis.clients.jedis.Jedis;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
-
+/**
+*@author rock
+*@Date 2019/9/17 23:12
+*@param
+*@return
+*
+*/
 public class JsoupTest3 {
     public static void main(String[]args) throws IOException {
         Jedis jedis = new Jedis("192.168.43.97", 20001);

@@ -8,7 +8,13 @@ import redis.clients.jedis.Jedis;
 
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
-
+/**
+*@author rock
+*@Date 2019/9/17 23:12
+*@param
+*@return
+*
+*/
 public class JsoupTest2 {
     public static void main(String[]args) throws Exception{
         Jedis jedis = new Jedis("192.168.43.97", 20001);

@@ -16,7 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
-
+/**
+*@author rock
+*@Date 2019/9/17 23:13
+*@param
+*@return
+*
+*/
 @RestController
 @RequestMapping("/consumer")
 public class ConsumerController {

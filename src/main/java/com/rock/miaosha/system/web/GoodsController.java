@@ -9,7 +9,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
+/**
+*@author rock
+*@Date 2019/9/17 23:13
+*@param
+*@return
+*
+*/
 @RestController
 @RequestMapping("/goods")
 public class GoodsController {

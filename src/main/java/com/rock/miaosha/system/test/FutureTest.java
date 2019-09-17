@@ -8,7 +8,13 @@ import java.time.LocalTime;
 import java.util.Date;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
-
+/**
+*@author rock
+*@Date 2019/9/17 23:12
+*@param
+*@return
+*
+*/
 public class FutureTest {
 
 
