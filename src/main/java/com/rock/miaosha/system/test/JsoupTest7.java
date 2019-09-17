@@ -8,14 +8,11 @@ import org.jsoup.select.Elements;
 import redis.clients.jedis.Jedis;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Vector;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class JsoupTest5 {
+public class JsoupTest7 {
 
     private final static ConcurrentHashMap HASH_MAP = new ConcurrentHashMap();
 
@@ -28,9 +25,8 @@ public class JsoupTest5 {
     }
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        String URL = "http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2017/";
+        String URL = "http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2018/44.html";
         int level = 1;
-        Jedis jedis = new Jedis("192.168.43.97", 20001);
         Document document = null;
         try {
             document = Jsoup.connect(URL).timeout(500000).get();
@@ -39,33 +35,7 @@ public class JsoupTest5 {
             ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
             CompletionService service = new ExecutorCompletionService(executorService);
             AtomicInteger id = new AtomicInteger(1);
-//        ArrayList<Object> list = new ArrayList<>();
-//        LinkedBlockingQueue<Object> objects = new LinkedBlockingQueue<>();
-//        Vector<Object> vector = new Vector<>();
-            CopyOnWriteArrayList<Object> list = new CopyOnWriteArrayList<>();
-            for (Element element : select) {
-
-                Elements a = element.select("a");
-                for (Element element1 : a) {
-                    ConcurrentHashMap<Object, Object> map = new ConcurrentHashMap<>();
-                    String href = element1.select("a").attr("abs:href");
-                    if (href != null && !href.isEmpty()) {
-                        String name=element1.select("a").last().text();
-                        Future submit = service.submit(new GetCityList(href, level + 1, id.get(),name));
-                        if (submit != null) {
-                            map.put("id", id.getAndIncrement());
-                            map.put("lid", 1);
-                            map.put("mid", 1);
-                            map.put("name",name);
-                            map.put(HASH_MAP.get(level), submit.get());
-                            list.add(map);
-                        }
-                    }
-                }
-            }
-            System.out.println("list:" + list);
-            Object o = JSON.toJSON(list);
-            jedis.set(HASH_MAP.get(level).toString(), o.toString());
+            Future submit = service.submit(new GetCityList(URL, level + 1, id.get(),"广东省"));
             executorService.shutdown();
         } catch (IOException e) {
             e.printStackTrace();
@@ -116,7 +86,7 @@ public class JsoupTest5 {
                 }
                 executorService.shutdown();
                 if (list != null && !list.isEmpty()) {
-                    System.out.println("GetCountryAddress:" + list);
+                    System.out.println("GetCityList:" + list);
                     Object o = JSON.toJSON(list);
                     jedis.set(name,o.toString());
                     return list;
@@ -147,8 +117,8 @@ public class JsoupTest5 {
             ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
             CompletionService service = new ExecutorCompletionService(executorService);
             AtomicInteger id1 = new AtomicInteger(1);
-            CopyOnWriteArrayList<Object> list = new CopyOnWriteArrayList<>();
 
+            CopyOnWriteArrayList<Object> list = new CopyOnWriteArrayList<>();
             Document document = null;
             try {
                 document = Jsoup.connect(url).timeout(500000).get();
@@ -169,7 +139,6 @@ public class JsoupTest5 {
                     return list;
                 }
 
-
                 for (Element element : select) {
                     ConcurrentHashMap<Object, Object> map = new ConcurrentHashMap<>();
                     String href = element.select("a").attr("abs:href");
@@ -185,9 +154,9 @@ public class JsoupTest5 {
                         }
                     }
                 }
-                System.out.println("GetCountryAddress:" + list);
                 executorService.shutdown();
                 if (list != null && !list.isEmpty()) {
+                    System.out.println("GetCountryAddress:" + list);
                     return list;
                 }
             } catch (IOException e) {
@@ -231,8 +200,8 @@ public class JsoupTest5 {
                             list.add(map);
                     }
                 }
-                System.out.println("GetCountryAddress:" + list);
                 if (list != null && !list.isEmpty()) {
+                    System.out.println("GetDowntownList:" + list);
                     return list;
                 }
             } catch (IOException e) {

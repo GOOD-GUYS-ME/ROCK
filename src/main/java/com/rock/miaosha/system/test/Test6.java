@@ -1,16 +1,28 @@
 package com.rock.miaosha.system.test;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
 public class Test6 {
-    public static void main(String[]args) throws ExecutionException, InterruptedException {
+    public static void main(String[]args) throws ExecutionException, InterruptedException, IOException {
+        String URL = "http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2018/46/4604.html";
         ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
         CompletionService service=new ExecutorCompletionService(executorService);
-        Future submit = service.submit(new GetProvinceAddress());
-        Object o = submit.get();
-        System.out.println("o:"+o);
+//        Future submit = service.submit(new GetProvinceAddress());
+//        Object o = submit.get();
+//        System.out.println("o:"+o);
+        Document document = Jsoup.connect(URL).timeout(5000).get();
+        Elements a = document.select("tr.towntr");
+        for (Element element : a) {
+            System.out.println("element:"+element.select("a").last().text());
+        }
         executorService.shutdown();
     }
 
